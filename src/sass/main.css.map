@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "mappings": "AGAA,AAAA,CAAC,CAAC;EACA,UAAU,EAAE,UAAU;EACtB,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;CACX;;AHSD,AAAA,KAAK,CAAC;EACJ,SAAS,CAAA,KAAC;CACX",
+    "sources": [
+        "main.scss",
+        "abstracts/_mixins.scss",
+        "abstracts/_responsive.scss",
+        "base/_reset.scss",
+        "base/_typography.scss",
+        "base/_animations.scss",
+        "layout/_header.scss",
+        "themes/_dark.scss"
+    ],
+    "names": [],
+    "file": "main.css"
+}

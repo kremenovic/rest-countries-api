@@ -1,0 +1,16 @@
+@import "./abstracts/mixins";
+@import "./abstracts/responsive";
+
+@import "./base/reset";
+@import "./base/typography";
+@import "./base/animations";
+
+@import "./layout/header";
+// @import "./layout/body";
+// @import "./layout/footer";
+
+@import "./themes/dark";
+
+:root {
+  --primary: #fff;
+}
