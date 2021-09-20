@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useGlobalContext } from "../context";
 
 const SingleItem = ({
   name,
@@ -13,6 +14,8 @@ const SingleItem = ({
   languages,
   borders,
 }) => {
+  const { countries, loading } = useGlobalContext();
+
   return (
     <div className="singleCountry__row">
       <div className="flagContainer">
@@ -25,7 +28,12 @@ const SingleItem = ({
             Native Name: <span>{nativeName}</span>
           </h4>
           <h4>
-            Population: <span>{population}</span>
+            Population:{" "}
+            <span>
+              {population.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+              })}
+            </span>
           </h4>
           <h4>
             Region: <span>{region}</span>
@@ -48,7 +56,7 @@ const SingleItem = ({
           <h4>
             Languages:{" "}
             {languages.map((language, index) => (
-              <span key={index}>{language.name}, </span>
+              <span key={index}>{language.name} </span>
             ))}
           </h4>
         </div>

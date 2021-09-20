@@ -1,16 +1,55 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useCallback } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-  const [apiUrl, setApiUrl] = useState("https://restcountries.eu/rest/v2/all");
+  const [apiUrl, setApiUrl] = useState("https://restcountries.eu/rest/v2/");
   const [countries, setCountries] = useState([]);
+  const [search, setSearch] = useState("a");
+  const [searchType, setSearchType] = useState("name");
+
+  const selectRef = useRef("");
+
+  const filterApi = () => {
+    switch (selectRef.current.value) {
+      case "all":
+        setSearchType("name");
+        setSearch("a");
+        break;
+      case "africa":
+        setSearchType("region");
+        setSearch("africa");
+        break;
+      case "americas":
+        setSearchType("region");
+        setSearch("americas");
+        break;
+      case "asia":
+        setSearchType("region");
+        setSearch("asia");
+        break;
+      case "europe":
+        setSearchType("region");
+        setSearch("europe");
+        break;
+      case "oceania":
+        setSearchType("region");
+        setSearch("oceania");
+        break;
+    }
+  };
+
   const fetchData = async () => {
     try {
       setLoading(true);
-      let response = await fetch(apiUrl);
+      let response = await fetch(`${apiUrl}${searchType}/${search}`);
       let data = await response.json();
       if (data) {
         const countryData = data.map((info) => {
@@ -30,16 +69,31 @@ const AppProvider = ({ children }) => {
       }
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      console.log(`error je: ${error}`);
     }
   };
 
   useEffect(() => {
+    if (search === "") {
+      setSearch("a");
+    }
     fetchData();
-  }, []);
+  }, [search]);
 
   return (
-    <AppContext.Provider value={{ countries, loading, setLoading }}>
+    <AppContext.Provider
+      value={{
+        countries,
+        loading,
+        setLoading,
+        setSearch,
+        search,
+        filterApi,
+        selectRef,
+        setSearchType,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

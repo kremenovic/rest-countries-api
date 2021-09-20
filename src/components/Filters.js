@@ -1,11 +1,21 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { useGlobalContext } from "../context";
 const Filters = () => {
+  const { search, setSearch, filterApi, selectRef, setSearchType } =
+    useGlobalContext();
+
+  const inputTextHandler = (e) => {
+    e.preventDefault();
+    setSearchType("name");
+    setSearch(e.target.value);
+  };
+
   return (
     <section className="filters">
       <div className="filters__search">
-        <form>
+        <form onChange={inputTextHandler}>
           <FaSearch />
           <input
             className="input-field"
@@ -16,16 +26,23 @@ const Filters = () => {
       </div>
       <div className="filters__select">
         <div className="dropdown">
-          <button className="dropdown__filterBtn">
-            Filter by Region <MdKeyboardArrowDown />
-          </button>
-          <div className="dropdown__content">
-            <option value="Africa">Africa</option>
-            <option value="America">America</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="Ocenia">Ocenia</option>
-          </div>
+          <select
+            name="regions"
+            id="regions"
+            ref={selectRef}
+            onChange={filterApi}
+            defaultValue={"DEFAULT"}
+          >
+            <option value="DEFAULT" disabled>
+              Filter by Region
+            </option>
+            <option value="all">All</option>
+            <option value="africa">Africa</option>
+            <option value="americas">America</option>
+            <option value="asia">Asia</option>
+            <option value="europe">Europe</option>
+            <option value="oceania">Oceania</option>
+          </select>
         </div>
       </div>
     </section>

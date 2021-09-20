@@ -16,7 +16,12 @@ const Country = ({
         <div className="country__info">
           <h3>{countryName}</h3>
           <p>
-            Population: <span>{population}</span>
+            Population:{" "}
+            <span>
+              {population.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+              })}
+            </span>
           </p>
           <p>
             Region: <span>{region}</span>
