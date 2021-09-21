@@ -34,7 +34,7 @@ const Single = () => {
 
   useEffect(() => {
     fetchCountryData();
-  }, []);
+  }, [id]);
 
   if (loading) {
     return <Loading />;

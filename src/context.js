@@ -53,7 +53,15 @@ const AppProvider = ({ children }) => {
       let data = await response.json();
       if (data) {
         const countryData = data.map((info) => {
-          const { alpha3Code, capital, flag, name, region, population } = info;
+          const {
+            alpha3Code,
+            capital,
+            flag,
+            name,
+            region,
+            population,
+            borders,
+          } = info;
           return {
             countryCode: alpha3Code,
             capital,
@@ -61,6 +69,7 @@ const AppProvider = ({ children }) => {
             countryName: name,
             region,
             population,
+            borders,
           };
         });
         setCountries(countryData);

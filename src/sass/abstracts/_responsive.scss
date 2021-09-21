@@ -1,0 +1,54 @@
+@media only screen and (max-width: 768px) {
+  header {
+    .section {
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      h2 {
+        font-size: 14px;
+      }
+
+      h4 {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .section {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  .filters {
+    width: 100%;
+    display: inline-block !important;
+
+    &__search {
+      width: 100% !important;
+      margin-bottom: 40px;
+    }
+  }
+
+  .countries {
+    grid-template-columns: 1fr !important;
+    padding: 0px 35px;
+  }
+
+  .singlePage {
+    .singleCountry {
+      &__row {
+        grid-template-columns: 1fr !important;
+
+        .flagContainer {
+          max-width: 100% !important;
+        }
+
+        .infoContainer {
+          &__basicInfo {
+            grid-template-columns: 1fr !important;
+            grid-gap: 10px;
+          }
+        }
+      }
+    }
+  }
+}

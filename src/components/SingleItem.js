@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useGlobalContext } from "../context";
+import { Link } from "react-router-dom";
 
 const SingleItem = ({
   name,
@@ -15,6 +16,20 @@ const SingleItem = ({
   borders,
 }) => {
   const { countries, loading } = useGlobalContext();
+  const borderCountryNames = [];
+
+  const findBorder = countries.find((border, index) => {
+    if (border.countryName === name) {
+      let borderCountries = border.borders;
+      borderCountries.forEach((country) => {
+        let nesto = countries.find((item, index) => {
+          if (item.countryCode === country) {
+            borderCountryNames.push(item.countryName);
+          }
+        });
+      });
+    }
+  });
 
   return (
     <div className="singleCountry__row">
@@ -63,9 +78,15 @@ const SingleItem = ({
         <div className="infoContainer__borders">
           <h4>
             Border Countries:{" "}
-            {borders.map((border, index) => (
-              <span key={index}>{border} </span>
-            ))}
+            {borderCountryNames.length ? (
+              borderCountryNames.map((border, index) => (
+                <Link to={`/country/${border}`} key={index}>
+                  <span key={index}>{border} </span>
+                </Link>
+              ))
+            ) : (
+              <span>None</span>
+            )}
           </h4>
         </div>
       </div>
