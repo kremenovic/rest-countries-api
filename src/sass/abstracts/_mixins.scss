@@ -5,3 +5,8 @@
   width: 100%;
   margin: 0 auto;
 }
+
+@mixin transition {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}

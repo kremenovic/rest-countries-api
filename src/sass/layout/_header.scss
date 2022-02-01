@@ -1,6 +1,7 @@
 header {
   background-color: #fff;
   border-bottom: 3px solid var(--lightBackground);
+  @include transition;
 
   .section {
     @include section;

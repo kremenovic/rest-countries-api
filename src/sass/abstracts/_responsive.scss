@@ -26,11 +26,15 @@
       width: 100% !important;
       margin-bottom: 40px;
     }
+
+    &__select {
+      width: 100% !important;
+    }
   }
 
   .countries {
     grid-template-columns: 1fr !important;
-    padding: 0px 35px;
+    padding: 0px;
   }
 
   .singlePage {

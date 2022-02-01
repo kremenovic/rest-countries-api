@@ -1,92 +1,91 @@
-import React, { useState, useEffect } from "react";
 import { useGlobalContext } from "../context";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useParams, Link } from "react-router-dom";
 
-const SingleItem = ({
-  name,
-  nativeName,
-  population,
-  flag,
-  region,
-  subregion,
-  capital,
-  topLevelDomain,
-  currencies,
-  languages,
-  borders,
-}) => {
-  const { countries, loading } = useGlobalContext();
-  const borderCountryNames = [];
+import Loading from "../components/Loading";
 
-  const findBorder = countries.find((border, index) => {
-    if (border.countryName === name) {
-      let borderCountries = border.borders;
-      borderCountries.forEach((country) => {
-        let nesto = countries.find((item, index) => {
-          if (item.countryCode === country) {
-            borderCountryNames.push(item.countryName);
-          }
-        });
-      });
+const SingleItem = () => {
+  const countryName = useParams();
+  const { loading, setLoading } = useGlobalContext();
+  const [singleCountry, setSingleCountry] = useState([]);
+
+  const url = "https://restcountries.com/v2/alpha/";
+
+  let id = countryName.countryCode;
+
+  const fetchData = useCallback(async () => {
+    try {
+      setLoading(true);
+      let response = await fetch(`${url}${id}`);
+      let data = await response.json();
+      setSingleCountry(data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
     }
   });
+
+  useEffect(() => {
+    fetchData();
+  }, [id]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="singleCountry__row">
       <div className="flagContainer">
-        <img src={flag} alt={`Flag of ${name}`} />
+        <img src={singleCountry.flag} alt={`Flag of `} />
       </div>
       <div className="infoContainer">
-        <h1>{name}</h1>
+        <h1>{singleCountry.name}</h1>
         <div className="infoContainer__basicInfo">
           <h4>
-            Native Name: <span>{nativeName}</span>
+            Native Name: <span>{singleCountry.nativeName}</span>
           </h4>
           <h4>
             Population:{" "}
             <span>
-              {population.toLocaleString(undefined, {
+              {singleCountry?.population?.toLocaleString(undefined, {
                 minimumFractionDigits: 2,
               })}
             </span>
           </h4>
           <h4>
-            Region: <span>{region}</span>
+            Region: <span>{singleCountry.region}</span>
           </h4>
           <h4>
-            Sub Region: <span>{subregion}</span>
+            Capital: <span>{singleCountry.capital}</span>
           </h4>
           <h4>
-            Capital: <span>{capital}</span>
-          </h4>
-          <h4>
-            Top Level Domain: <span>{topLevelDomain}</span>
+            Top Level Domain: <span>{singleCountry.topLevelDomain}</span>
           </h4>
           <h4>
             Currencies:{" "}
-            {currencies.map((currency, index) => (
-              <span key={index}>{currency.name}</span>
-            ))}
+            {singleCountry?.currencies?.map((currency, index) => {
+              return <span key={index}>{currency.name}</span>;
+            })}
           </h4>
           <h4>
             Languages:{" "}
-            {languages.map((language, index) => (
-              <span key={index}>{language.name} </span>
-            ))}
+            {singleCountry?.languages?.map((language, index) => {
+              return <span key={index}>{language.name}</span>;
+            })}
           </h4>
         </div>
         <div className="infoContainer__borders">
           <h4>
-            Border Countries:{" "}
-            {borderCountryNames.length ? (
-              borderCountryNames.map((border, index) => (
-                <Link to={`/country/${border}`} key={index}>
-                  <span key={index}>{border} </span>
-                </Link>
-              ))
-            ) : (
-              <span>None</span>
-            )}
+            Borders:
+            <ul>
+              {singleCountry?.borders?.map((border, index) => {
+                return (
+                  <Link key={index} to={`/country/${border}`}>
+                    <li>{border}</li>
+                  </Link>
+                );
+              })}
+            </ul>
           </h4>
         </div>
       </div>

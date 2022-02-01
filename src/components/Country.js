@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 const Country = ({
   countryCode,
   countryName,
-  flag,
+  flags,
   capital,
   region,
   population,
 }) => {
   return (
-    <Link to={`/country/${countryName}`}>
+    <Link to={`/country/${countryCode}`}>
       <div className="country">
-        <img src={flag} alt={countryName} />
+        <img src={flags.png} alt={countryName} />
         <div className="country__info">
           <h3>{countryName}</h3>
           <p>

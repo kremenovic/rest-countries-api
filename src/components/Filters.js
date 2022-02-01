@@ -1,15 +1,19 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
-import { MdKeyboardArrowDown } from "react-icons/md";
 import { useGlobalContext } from "../context";
 const Filters = () => {
-  const { search, setSearch, filterApi, selectRef, setSearchType } =
+  const { setSearch, filterApi, selectRef, setSearchType, search } =
     useGlobalContext();
 
   const inputTextHandler = (e) => {
     e.preventDefault();
-    setSearchType("name");
-    setSearch(e.target.value);
+    if (e.target.value.length === 0) {
+      setSearchType("name");
+      setSearch(`a`);
+    } else {
+      setSearchType("name");
+      setSearch(`${e.target.value}?fullText = false`);
+    }
   };
 
   return (
@@ -34,11 +38,11 @@ const Filters = () => {
             defaultValue={"DEFAULT"}
           >
             <option value="DEFAULT" disabled>
-              Filter by Region
+              Filter by block
             </option>
             <option value="all">All</option>
             <option value="africa">Africa</option>
-            <option value="americas">America</option>
+            <option value="americas">Americas</option>
             <option value="asia">Asia</option>
             <option value="europe">Europe</option>
             <option value="oceania">Oceania</option>

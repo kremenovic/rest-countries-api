@@ -10,18 +10,23 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-  const [apiUrl, setApiUrl] = useState("https://restcountries.eu/rest/v2/");
   const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState("a");
   const [searchType, setSearchType] = useState("name");
 
   const selectRef = useRef("");
 
+  const apiUrl = "https://restcountries.com/v2/";
+
   const filterApi = () => {
     switch (selectRef.current.value) {
       case "all":
         setSearchType("name");
         setSearch("a");
+        break;
+      case "asia":
+        setSearchType("region");
+        setSearch("asia");
         break;
       case "africa":
         setSearchType("region");
@@ -31,10 +36,6 @@ const AppProvider = ({ children }) => {
         setSearchType("region");
         setSearch("americas");
         break;
-      case "asia":
-        setSearchType("region");
-        setSearch("asia");
-        break;
       case "europe":
         setSearchType("region");
         setSearch("europe");
@@ -43,10 +44,14 @@ const AppProvider = ({ children }) => {
         setSearchType("region");
         setSearch("oceania");
         break;
+      default:
+        console.log(
+          `Sorry, there was an error. Missing ${selectRef.current.value}`
+        );
     }
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       let response = await fetch(`${apiUrl}${searchType}/${search}`);
@@ -56,7 +61,7 @@ const AppProvider = ({ children }) => {
           const {
             alpha3Code,
             capital,
-            flag,
+            flags,
             name,
             region,
             population,
@@ -65,7 +70,7 @@ const AppProvider = ({ children }) => {
           return {
             countryCode: alpha3Code,
             capital,
-            flag,
+            flags,
             countryName: name,
             region,
             population,
@@ -81,14 +86,11 @@ const AppProvider = ({ children }) => {
       setLoading(false);
       console.log(`error je: ${error}`);
     }
-  };
+  }, [search, searchType]);
 
   useEffect(() => {
-    if (search === "") {
-      setSearch("a");
-    }
     fetchData();
-  }, [search]);
+  }, [search, fetchData]);
 
   return (
     <AppContext.Provider

@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useGlobalContext } from "./context";
 import Home from "./pages/Home";
 import Single from "./pages/Single";
 import Error from "./pages/Error";
@@ -14,7 +13,7 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/country/:countryName">
+        <Route path="/country/:countryCode">
           <Single />
         </Route>
         <Route path="*">

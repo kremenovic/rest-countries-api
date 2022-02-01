@@ -1,0 +1,92 @@
+body.dark-mode {
+  background-color: var(--darkBackground);
+  @include transition;
+
+  header {
+    background-color: var(--darkElement);
+    border-color: var(--darkElement);
+    @include transition;
+
+    h2 {
+      a {
+        color: var(--lightElement);
+        @include transition;
+      }
+    }
+
+    h4 {
+      color: var(--lightElement);
+      @include transition;
+    }
+  }
+  main {
+    background-color: var(--darkBackground);
+    @include transition;
+
+    .filters {
+      &__search {
+        background-color: var(--darkElement);
+        @include transition;
+
+        svg {
+          fill: var(--lightElement);
+          @include transition;
+        }
+
+        input {
+          background-color: var(--darkElement);
+          color: var(--lightElement);
+          @include transition;
+
+          &::placeholder {
+            color: var(--lightElement);
+            @include transition;
+          }
+        }
+      }
+
+      &__select {
+        background: var(--darkElement);
+        @include transition;
+
+        .dropdown {
+          select {
+            background: var(--darkElement);
+            color: var(--lightElement);
+            @include transition;
+          }
+        }
+      }
+    }
+
+    .countries {
+      .country {
+        background-color: var(--darkElement);
+        color: var(--lightElement);
+        @include transition;
+      }
+    }
+  }
+
+  .singlePage {
+    .backBtn {
+      color: var(--lightElement);
+      @include transition;
+    }
+
+    .infoContainer {
+      color: var(--lightElement);
+      @include transition;
+
+      &__borders {
+        ul {
+          li {
+            background: var(--darkElement);
+            color: var(--lightElement);
+            @include transition;
+          }
+        }
+      }
+    }
+  }
+}
