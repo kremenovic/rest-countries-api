@@ -2,7 +2,7 @@
 
 This is a solution to the [REST Countries API with color theme switcher challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-<a href="https://kremenovic-react-planet-facts.netlify.app/"><img src="https://i.imgur.com/a8B0twu.png"/></a>
+<a href="https://kremenovic-rest-countries-api.netlify.app/"><img src="https://i.imgur.com/a8B0twu.png"/></a>
 
 ## Table of contents
 
@@ -38,8 +38,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [frontendmentor.io](https://www.frontendmentor.io/solutions/react-planet-facts-Cw-kRe8-l)
-- Live Site URL: [https://kremenovic-react-todo-app.netlify.app/](https://kremenovic-react-planet-facts.netlify.app/)
+- Solution URL: [frontendmentor.io](https://www.frontendmentor.io/solutions/rest-countries-api-react-app-EV6w84gk9)
+- Live Site URL: [https://kremenovic-rest-countries-api.netlify.app/](https://kremenovic-rest-countries-api.netlify.app/)
 
 ### Built with
 
@@ -77,4 +77,4 @@ Your app is ready to be deployed!
 
 ## Live Demo
 
-<a href="https://kremenovic-react-planet-facts.netlify.app/">Click here to see live demo</a>
+<a href="https://kremenovic-rest-countries-api.netlify.app/">Click here to see live demo</a>
